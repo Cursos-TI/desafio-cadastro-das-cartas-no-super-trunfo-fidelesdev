@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
-// Desafio Super Trunfo - PaÃ­ses
+// Desafio Super Trunfo - Países
 // Tema 1 - Cadastro das Cartas
-// Este cÃ³digo inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentÃ¡rios para implementar cada parte do desafio.
+// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
+// Siga os comentários para implementar cada parte do desafio.
 //Teste larissa
 
 int main(){
@@ -27,6 +27,8 @@ int main(){
     float densidade2;
     float pibCapita1;
     float pibCapita2;
+    float superPoder1;
+    float superPoder2;
     
     printf("Vamos jogar o jogo super trunfo de paises!\n");
     printf("vamos registrar as cartas do jogo:\n");
@@ -37,7 +39,7 @@ int main(){
     scanf("%s", &codigo1);
     printf("Digite o nome da cidade:\n");
     getchar(); //consome o caractere \n do buffer deixado pelo scanf, para nao ser consumir no fgets
-    fgets(nomeCidade1, sizeof(nomeCidade1), stdin); // captura strings com espaÃ§os
+    fgets(nomeCidade1, sizeof(nomeCidade1), stdin); // captura strings com espaços
     nomeCidade1[strcspn(nomeCidade1, "\n")] = '\0'; // elimina a quebra de linha que aparece ao usar fgets
     printf("Informe o numero de habitantes da cidade: \n");
     scanf("%i", &populacao1);
@@ -50,15 +52,16 @@ int main(){
 
     densidade1 = (float) populacao1 / area1;
     pibCapita1 = (float) pib1 / populacao1;
+    superPoder1 = populacao1 + area1 + pib1 + nPontosTuristicos1 + pibCapita1 + 1/densidade1;
 
     printf("\nOtimo, agora vamos registrar a segunda carta, no mesmo formato:\n");
     printf("Estado('A' a 'H'):\n");
-    scanf(" %c", &estado2); // espaÃ§o antes para prevenir de ler caracteres se tiver no buffer
+    scanf(" %c", &estado2); // espaço antes para prevenir de ler caracteres se tiver no buffer
     printf("Codigo(ex: A01, B03): \n");
     scanf("%s", &codigo2);
     printf("Nome da cidade:\n");
     getchar(); //consome o caractere \n do buffer deixado pelo scanf, para nao ser consumir no fgets
-    fgets(nomeCidade2, sizeof(nomeCidade2), stdin); // captura strings com espaÃ§os
+    fgets(nomeCidade2, sizeof(nomeCidade2), stdin); // captura strings com espaços
     nomeCidade2[strcspn(nomeCidade2, "\n")] = '\0'; // elimina a quebra de linha que aparece ao usar fgets
     printf("Numero de habitantes da cidade: \n");
     scanf("%i", &populacao2);
@@ -71,6 +74,7 @@ int main(){
 
     densidade2 = (float) populacao2 / area2;
     pibCapita2 = (float) pib2 / populacao2;
+    superPoder2 = populacao2 + area2 + pib2 + nPontosTuristicos2 + pibCapita2 + 1/densidade2;
 
     printf("Muito bem, aqui esta as cartas registradas \n");
     printf("Carta 1:\n");
@@ -81,9 +85,9 @@ int main(){
     printf("Area: %.2f km2\n", area1);
     printf("PIB: %.2f reais\n", pib1);
     printf("Numero de pontos turisticos: %i\n", nPontosTuristicos1);
-
     printf("Densidade Populacional: %.2f hab/km2\n", densidade1);
     printf("PIB per Capita: %.2f reais\n", pibCapita1);
+    printf("Super Poder: %.2f\n", superPoder1);
     
     printf("\nCarta 2:\n");
     printf("Estado: %c\n", estado2);
@@ -93,10 +97,20 @@ int main(){
     printf("Area: %.2f km2\n", area2);
     printf("PIB: %.2f reais\n", pib2);
     printf("Numero de pontos turisticos: %i\n", nPontosTuristicos2);
-
     printf("Densidade Populacional: %.2f hab/km2\n", densidade2);
     printf("PIB per Capita: %.2f reais\n", pibCapita2);
+    printf("Super Poder: %.2f \n", superPoder2);
 
+
+    printf("\nComparacao de Cartas: \n");
+    // como a comparação resulta em 0 ou 1, só subtrair 2 por ela para obter o vencedor, a carta 1 ou 2
+    printf("Populacao: Carta %d venceu\n", 2 - (int)(populacao1 > populacao2)); 
+    printf("Area: Carta %d venceu\n", 2 - (int)(area1 > area2)); 
+    printf("PIB: Carta %d venceu\n", 2 - (int)(pib1 > pib2)); 
+    printf("Pontos Turisticos: Carta %d venceu\n", 2 - (int)(nPontosTuristicos1 > nPontosTuristicos2)); 
+    printf("Densidade Populacional: Carta %d venceu\n", 2 - (int)(densidade1 < densidade2)); 
+    printf("PIB per Capita: Carta %d venceu\n", 2 - (int)(pibCapita1 > pibCapita2)); 
+    printf("Super Poder: Carta %d venceu\n", 2 - (int)(superPoder1 > superPoder2)); 
 
 
     return 0;
